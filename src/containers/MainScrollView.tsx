@@ -8,7 +8,8 @@ import { AppState } from "../globals"
 import { useLayoutType } from "../components/GridContext"
 import ModalProvider from "../components/ModalContext"
 import ScrollProvider, { useScrollTo } from "../components/ScrollContext"
-import Footer from "../components/Footer"
+// import { useScrollTo } from "../components/ScrollContext"
+// import Footer from "../components/Footer"
 import Menu from "../components/Menu"
 
 interface Props extends RouteComponentProps {
@@ -41,8 +42,10 @@ function MainScrollView({ children, state, location }: Props) {
       <ModalProvider>
         {layoutType === "tablet" && menu}
         <ScrollProvider style={styles.scroll}>
+          {/* <div css={styles.scroll}> */}
           {layoutType === "desktop" && <div css={styles.menu}>{menu}</div>}
           <MainView pathname={location.pathname}>{children}</MainView>
+          {/* </div> */}
         </ScrollProvider>
       </ModalProvider>
     </div>
@@ -59,7 +62,7 @@ function MainView({ children, pathname }: { children: ReactNode; pathname: strin
       <div role="main" id="main" tabIndex={-1} css={styles.view}>
         {children}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

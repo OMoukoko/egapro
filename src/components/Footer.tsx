@@ -5,14 +5,15 @@ import { Link } from "react-router-dom"
 import globalStyles from "../utils/globalStyles"
 import Logo from "./Logo"
 
-import { useColumnsWidth, useLayoutType } from "./GridContext"
+// import { useColumnsWidth, useLayoutType } from "./GridContext"
+import { useLayoutType } from "./GridContext"
 
 import packageConfig from "../../package.json"
 
 function Footer() {
-  const width = useColumnsWidth(2)
+  // const width = useColumnsWidth(2)
   const layoutType = useLayoutType()
-  const isDesktop = layoutType === "desktop"
+  // const isDesktop = layoutType === "desktop"
   const isMobile = layoutType === "mobile"
   const version = process.env.REACT_APP_VERSION || packageConfig.version
 
@@ -21,16 +22,17 @@ function Footer() {
       role="contentinfo"
       css={[
         styles.footer,
-        isDesktop && css({ marginLeft: -(width + globalStyles.grid.gutterWidth) }),
+        // isDesktop && css({ marginLeft: -(width + globalStyles.grid.gutterWidth) }),
         isMobile && css({ display: "block", paddingTop: "1em" }),
       ]}
     >
-      <div css={[styles.footerLeft, isDesktop && css({ width }), styles.footerLeftPrint]}>
+      {/* <div css={[styles.footerLeft, isDesktop && css({ width }), styles.footerLeftPrint]}> */}
+      <div>
         <a
           href="https://travail-emploi.gouv.fr/"
           target="_blank"
           rel="noopener noreferrer"
-          css={[styles.containerLogo, isDesktop && styles.containerLogoDesktop, isMobile && styles.containerLogoMobile]}
+          // css={[styles.containerLogo, isDesktop && styles.containerLogoDesktop, isMobile && styles.containerLogoMobile]}
         >
           <Logo />
         </a>
@@ -94,7 +96,7 @@ const styles = {
   footer: css({
     backgroundColor: "#FFF",
     height: 120,
-    marginTop: 54,
+    // marginTop: 54,
     flexShrink: 0,
     display: "flex",
     flexDirection: "row",

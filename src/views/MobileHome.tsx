@@ -5,7 +5,7 @@ import globalStyles from "../utils/globalStyles"
 
 import Logo from "../components/Logo"
 import ActionLink from "../components/ActionLink"
-import Footer from "../components/Footer"
+// import Footer from "../components/Footer"
 import { Fragment } from "react"
 import { useTitle } from "../utils/hooks"
 
@@ -21,7 +21,7 @@ function MobileHome({ openMenu }: Props) {
   return (
     <Fragment>
       <div css={styles.page}>
-        <Logo layout="mobile" />
+        <Logo />
 
         <h1 css={styles.title}>
           Bienvenue
@@ -70,7 +70,7 @@ function MobileHome({ openMenu }: Props) {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </Fragment>
   )
 }

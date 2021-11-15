@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import React from "react"
 import { css, jsx } from "@emotion/core"
 import { Route, Switch } from "react-router-dom"
 
@@ -7,7 +8,8 @@ import { AppState, ActionType } from "../globals"
 import globalStyles from "../utils/globalStyles"
 
 import { useLayoutType } from "../components/GridContext"
-import Header from "../components/Header"
+// import Header from "../components/Header"
+import HeaderNew from "../components/Header2"
 
 import CGU from "../views/CGU"
 import FAQ from "../views/FAQ"
@@ -21,6 +23,7 @@ import Simulateur from "./Simulateur"
 import MainScrollView from "./MainScrollView"
 import MobileLayout from "./MobileLayout"
 import Accessibilite from "../views/Accessibilite"
+import Footer from "../components/Footer"
 
 interface Props {
   state: AppState | undefined
@@ -31,7 +34,8 @@ function AppLayout({ state, dispatch }: Props) {
   const layoutType = useLayoutType()
 
   return (
-    <div css={styles.layout}>
+    <React.Fragment>
+      <HeaderNew />
       <Switch>
         <Route
           render={() => {
@@ -40,39 +44,42 @@ function AppLayout({ state, dispatch }: Props) {
             return layoutType === "mobile" ? (
               <MobileLayout />
             ) : (
-              <div css={styles.horizontalLayout}>
-                <div css={styles.leftColumn}>
-                  <Header />
-                  <MainScrollView state={state}>
-                    <Switch>
-                      <Route path="/" exact render={(props) => <Home {...props} dispatch={dispatch} />} />
-                      <Route
-                        path="/simulateur/:code"
-                        render={({
-                          match: {
-                            params: { code },
-                          },
-                        }) => <Simulateur code={code} state={state} dispatch={dispatch} />}
-                      />
-                      <Route path="/mentions-legales" exact render={() => <MentionsLegales />} />
-                      <Route path="/accessibilite" exact render={() => <Accessibilite />} />
-                      <Route path="/cgu" exact render={() => <CGU />} />
-                      <Route path="/politique-confidentialite" exact render={() => <PolitiqueConfidentialite />} />
-                      <Route path="/infosApp" exact render={() => <InfosApp />} />
-                      <Route component={PageNotFound} />
-                    </Switch>
-                  </MainScrollView>
-                </div>
+              <div css={styles.layout}>
+                <div css={styles.horizontalLayout}>
+                  <div css={styles.leftColumn}>
+                    {/* <Header /> */}
+                    <MainScrollView state={state}>
+                      <Switch>
+                        <Route path="/" exact render={(props) => <Home {...props} dispatch={dispatch} />} />
+                        <Route
+                          path="/simulateur/:code"
+                          render={({
+                            match: {
+                              params: { code },
+                            },
+                          }) => <Simulateur code={code} state={state} dispatch={dispatch} />}
+                        />
+                        <Route path="/mentions-legales" exact render={() => <MentionsLegales />} />
+                        <Route path="/accessibilite" exact render={() => <Accessibilite />} />
+                        <Route path="/cgu" exact render={() => <CGU />} />
+                        <Route path="/politique-confidentialite" exact render={() => <PolitiqueConfidentialite />} />
+                        <Route path="/infosApp" exact render={() => <InfosApp />} />
+                        <Route component={PageNotFound} />
+                      </Switch>
+                    </MainScrollView>
+                  </div>
 
-                <div css={[styles.rightColumn, layoutType === "tablet" && styles.rightColumnTablet]}>
-                  <FAQ />
+                  <div css={[styles.rightColumn, layoutType === "tablet" && styles.rightColumnTablet]}>
+                    <FAQ />
+                  </div>
                 </div>
               </div>
             )
           }}
         />
       </Switch>
-    </div>
+      <Footer />
+    </React.Fragment>
   )
 }
 
